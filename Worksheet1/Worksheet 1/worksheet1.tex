@@ -1,0 +1,1094 @@
+\documentclass[11pt,a4paper]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%% Credit %%%%%%%%%%%%%%%%%%%%%%%%
+
+% template ini dibuat oleh martin.manullang@if.itera.ac.id untuk dipergunakan oleh seluruh sivitas akademik itera.
+
+%%%%%%%%%%%%%%%%%%%%%%%%% PACKAGE starts HERE %%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{microtype}
+\captionsetup[table]{name=Tabel}
+\captionsetup[figure]{name=Gambar}
+\usepackage{tabulary}
+\usepackage{minted}
+\usepackage{lmodern}  
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{placeins}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[all]{xy}
+\usepackage{tikz}
+\usepackage{verbatim}
+\usepackage[left=2cm,right=2cm,top=3cm,bottom=2.5cm]{geometry}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{psfrag}
+\usepackage[T1]{fontenc}
+\usepackage[scaled]{beramono}
+% Enable inserting code into the document
+\usepackage{listings}
+\usepackage{xcolor} 
+% custom color & style for listing
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{LightGray}{gray}{0.9}
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{green},
+	keywordstyle=\color{codegreen},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+\lstset{style=mystyle}
+\renewcommand{\lstlistingname}{Kode}
+%%%%%%%%%%%%%%%%%%%%%%%%% PACKAGE ends HERE %%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Data Diri %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\student}{\textbf{Hizkia Christovita Siahaan (122140110)}}
+\newcommand{\course}{\textbf{Sistem Teknologi Multimedia (IF25-40305)}}
+\newcommand{\assignment}{\textbf{Worksheet 1: Setup Python Environment untuk Multimedia}}
+
+%%%%%%%%%%%%%%%%%%% using theorem style %%%%%%%%%%%%%%%%%%%%
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{exa}[thm]{Example}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{coro}[thm]{Corollary}
+\newtheorem{quest}{Question}[section]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{lipsum}%% a garbage package you don't need except to create examples.
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Hizkia Christovita Siahaan (122140110)}
+\rhead{ \thepage}
+\cfoot{\textbf{Worksheet 1: Setup Python Environment untuk Multimedia}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+%%%%%%%%%%%%%%  Shortcut for usual set of numbers  %%%%%%%%%%%
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\setlength\headheight{14pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
+\begin{document}
+\thispagestyle{empty}
+\begin{center}
+	\includegraphics[scale = 0.15]{Figure/ifitera-header.png}
+	\vspace{0.1cm}
+\end{center}
+\noindent
+\rule{17cm}{0.2cm}\\[0.3cm]
+Nama: \student \hfill Tugas Ke: \assignment\\[0.1cm]
+Mata Kuliah: \course \hfill Tanggal: \today\\
+\rule{17cm}{0.05cm}
+\vspace{0.1cm}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BODY DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Tujuan Pembelajaran}
+Setelah menyelesaikan worksheet ini, mahasiswa diharapkan mampu:
+\begin{itemize}
+    \item Memahami pentingnya manajemen environment Python untuk pengembangan multimedia
+    \item Menginstall dan mengkonfigurasi Python environment menggunakan conda, venv, atau uv
+    \item Menginstall library-library Python yang diperlukan untuk multimedia processing
+    \item Memverifikasi instalasi dengan mengimpor dan menguji library multimedia
+    \item Mendokumentasikan proses konfigurasi dan hasil pengujian dalam format \LaTeX
+\end{itemize}
+
+\section{Latar Belakang}
+Python telah menjadi bahasa pemrograman yang sangat populer untuk multimedia processing karena memiliki ekosistem library yang sangat kaya. Namun, untuk dapat bekerja dengan multimedia secara efektif, kita perlu mengatur environment Python dengan benar dan menginstall library-library yang tepat.
+
+Manajemen environment Python sangat penting untuk:
+\begin{itemize}
+    \item Menghindari konflik antar library (dependency conflict)
+    \item Memastikan reproducibility dari project
+    \item Memudahkan kolaborasi antar developer
+    \item Memisahkan project yang berbeda dengan requirement yang berbeda
+\end{itemize}
+
+\section{Instruksi Tugas}
+
+\subsection{Persiapan}
+\textbf{Sebelum memulai, pastikan Anda telah:}
+\begin{itemize}
+    \item Menginstall Python 3.8 atau lebih baru di sistem Anda
+    \item Memilih salah satu tool manajemen environment: \textbf{conda}, \textbf{venv}, atau \textbf{uv}
+    \item Membuka terminal/command prompt
+    \item Menyiapkan dokumen \LaTeX\ ini untuk dokumentasi
+\end{itemize}
+
+\subsection{Bagian 1: Membuat Environment Python}
+Pilih \textbf{SALAH SATU} dari tiga opsi berikut dan ikuti langkah-langkahnya:
+
+\subsubsection{Opsi 1: Menggunakan Conda (Direkomendasikan untuk pemula)}
+Jalankan perintah berikut di terminal:
+
+\begin{lstlisting}[language=bash, caption=Membuat environment dengan Conda]
+# Membuat environment baru dengan nama 'multimedia'
+conda create -n multimedia python=3.11
+
+# Mengaktifkan environment
+conda activate multimedia
+
+# Verifikasi environment aktif
+conda info --envs
+\end{lstlisting}
+
+\subsubsection{Opsi 2: Menggunakan venv (Built-in Python)}
+\begin{lstlisting}[language=bash, caption=Membuat environment dengan venv]
+# Membuat environment baru
+python3 -m venv multimedia-env
+
+# Mengaktifkan environment (Linux/Mac)
+source multimedia-env/bin/activate
+
+# Mengaktifkan environment (Windows)
+# multimedia-env\Scripts\activate
+
+# Verifikasi environment aktif
+which python
+\end{lstlisting}
+
+\subsubsection{Opsi 3: Menggunakan uv (Modern dan cepat)}
+\begin{lstlisting}[language=bash, caption=Membuat environment dengan uv]
+# Install uv terlebih dahulu jika belum ada
+# pip install uv
+
+# Membuat environment baru
+uv venv multimedia-uv
+
+# Mengaktifkan environment (Linux/Mac)
+source multimedia-uv/bin/activate
+
+# Mengaktifkan environment (Windows)
+# multimedia-uv\Scripts\activate
+
+# Verifikasi environment aktif
+which python
+\end{lstlisting}
+
+\textbf{Dokumentasikan di sini:}
+\begin{itemize}
+    \item Tool manajemen environment yang Anda pilih: \textbf{[Menggunakan UV]}
+    \item Screenshot atau copy-paste output dari perintah verifikasi environment
+    \begin{lstlisting}[language=bash]
+    # PS C:\Semester 7\STM> pip install uv
+    Requirement already satisfied: uv in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (0.8.13)
+
+    [notice] A new release of pip is available: 25.1.1 -> 25.2
+    [notice] To update, run: python.exe -m pip install --upgrade pip
+
+    # PS C:\Semester 7\STM> cd Tugas1
+    # PS C:\Semester 7\STM\Tugas1> uv venv Tugas1
+    Using CPython 3.10.2 interpreter at: C:\Users\HIZKIA CHRISTOVITA\AppData\Local\Programs\Python\Python310\python.exe
+    Creating virtual environment at: Tugas1
+    Activate with: Tugas1\Scripts\activate
+
+    # PS C:\Semester 7\STM\Tugas1> Tugas1\Scripts\activate
+    # (Tugas1) PS C:\Semester 7\STM\Tugas1> where python
+    \end{lstlisting}
+\end{itemize}
+
+\subsection{Bagian 2: Instalasi Library Multimedia}
+Setelah environment aktif, install library-library berikut:
+
+\subsubsection{Library Audio Processing}
+\begin{lstlisting}[language=bash, caption=Instalasi library audio]
+# Untuk conda:
+conda install -c conda-forge librosa soundfile scipy
+
+# Untuk pip (venv/uv):
+pip install librosa soundfile scipy
+\end{lstlisting}
+
+\subsubsection{Library Image Processing}
+\begin{lstlisting}[language=bash, caption=Instalasi library image]
+# Untuk conda:
+conda install -c conda-forge opencv pillow scikit-image matplotlib
+
+# Untuk pip (venv/uv):
+pip install opencv-python pillow scikit-image matplotlib
+\end{lstlisting}
+
+\subsubsection{Library Video Processing}
+\begin{lstlisting}[language=bash, caption=Instalasi library video]
+# Untuk conda:
+conda install -c conda-forge ffmpeg
+pip install moviepy
+
+# Untuk pip (venv/uv):
+pip install moviepy
+\end{lstlisting}
+
+\subsubsection{Library General Purpose}
+\begin{lstlisting}[language=bash, caption=Instalasi library umum]
+# Untuk conda:
+conda install numpy pandas jupyter
+
+# Untuk pip (venv/uv):
+pip install numpy pandas jupyter
+\end{lstlisting}
+
+\textbf{Dokumentasikan di sini:}
+\begin{itemize}
+    \item Perintah instalasi yang Anda gunakan
+\begin{lstlisting}[language=bash]
+#Library Audio Processing
+pip install librosa soundfile scipy
+
+#Library Image Processing
+pip install opencv-python pillow scikit-image matplotlib
+
+#Library Video Processing
+pip install moviepy
+        
+#Library General Purpose
+pip install numpy pandas jupyter
+\end{lstlisting}
+    \item Screenshot proses instalasi atau output sukses
+\begin{lstlisting}[language=bash]
+#(Tugas1) PS C:\Semester 7\STM\Tugas1> pip install librosa soundfile scipy
+Collecting librosa
+  Downloading librosa-0.11.0-py3-none-any.whl.metadata (8.7 kB)
+Collecting soundfile
+  Using cached soundfile-0.13.1-py2.py3-none-win_amd64.whl.metadata (16 kB)
+Requirement already satisfied: scipy in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (1.15.3)
+Collecting audioread>=2.1.9 (from librosa)
+  Downloading audioread-3.0.1-py3-none-any.whl.metadata (8.4 kB)
+Collecting numba>=0.51.0 (from librosa)
+  Downloading numba-0.61.2-cp310-cp310-win_amd64.whl.metadata (2.9 kB)
+Requirement already satisfied: numpy>=1.22.3 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from librosa) (2.2.3)
+Collecting scikit-learn>=1.1.0 (from librosa)
+  Downloading scikit_learn-1.7.1-cp310-cp310-win_amd64.whl.metadata (11 kB)
+Collecting joblib>=1.0 (from librosa)
+  Downloading joblib-1.5.2-py3-none-any.whl.metadata (5.6 kB)
+Requirement already satisfied: decorator>=4.3.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from librosa) (5.2.1)
+Collecting pooch>=1.1 (from librosa)
+  Downloading pooch-1.8.2-py3-none-any.whl.metadata (10 kB)
+Collecting soxr>=0.3.2 (from librosa)
+  Downloading soxr-0.5.0.post1-cp310-cp310-win_amd64.whl.metadata (5.6 kB)
+Requirement already satisfied: typing_extensions>=4.1.1 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from librosa) (4.12.2)
+Collecting lazy_loader>=0.1 (from librosa)
+  Downloading lazy_loader-0.4-py3-none-any.whl.metadata (7.6 kB)
+Collecting msgpack>=1.0 (from librosa)
+  Downloading msgpack-1.1.1-cp310-cp310-win_amd64.whl.metadata (8.6 kB)
+Requirement already satisfied: cffi>=1.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from soundfile) (1.17.1)
+Requirement already satisfied: pycparser in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from cffi>=1.0->soundfile) (2.22)
+Requirement already satisfied: packaging in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from lazy_loader>=0.1->librosa) (24.0)
+Collecting llvmlite<0.45,>=0.44.0dev0 (from numba>=0.51.0->librosa)
+  Downloading llvmlite-0.44.0-cp310-cp310-win_amd64.whl.metadata (5.0 kB)
+Requirement already satisfied: platformdirs>=2.5.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from pooch>=1.1->librosa) (4.3.6)
+Requirement already satisfied: requests>=2.19.0 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from pooch>=1.1->librosa) (2.32.3)
+Requirement already satisfied: charset-normalizer<4,>=2 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from requests>=2.19.0->pooch>=1.1->librosa) (3.4.1)
+Requirement already satisfied: idna<4,>=2.5 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from requests>=2.19.0->pooch>=1.1->librosa) (3.10)
+Requirement already satisfied: urllib3<3,>=1.21.1 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from requests>=2.19.0->pooch>=1.1->librosa) (2.3.0)
+Requirement already satisfied: certifi>=2017.4.17 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from requests>=2.19.0->pooch>=1.1->librosa) (2025.4.26)
+Collecting threadpoolctl>=3.1.0 (from scikit-learn>=1.1.0->librosa)
+  Downloading threadpoolctl-3.6.0-py3-none-any.whl.metadata (13 kB)
+Downloading librosa-0.11.0-py3-none-any.whl (260 kB)
+Using cached soundfile-0.13.1-py2.py3-none-win_amd64.whl (1.0 MB)
+Downloading audioread-3.0.1-py3-none-any.whl (23 kB)
+Downloading joblib-1.5.2-py3-none-any.whl (308 kB)
+Downloading lazy_loader-0.4-py3-none-any.whl (12 kB)
+Downloading msgpack-1.1.1-cp310-cp310-win_amd64.whl (71 kB)
+Downloading numba-0.61.2-cp310-cp310-win_amd64.whl (2.8 MB)
+Downloading llvmlite-0.44.0-cp310-cp310-win_amd64.whl (30.3 MB)
+Downloading pooch-1.8.2-py3-none-any.whl (64 kB)
+Downloading scikit_learn-1.7.1-cp310-cp310-win_amd64.whl (8.9 MB)
+Downloading msgpack-1.1.1-cp310-cp310-win_amd64.whl (71 kB)
+Downloading numba-0.61.2-cp310-cp310-win_amd64.whl (2.8 MB)
+Downloading llvmlite-0.44.0-cp310-cp310-win_amd64.whl (30.3 MB)
+Downloading pooch-1.8.2-py3-none-any.whl (64 kB)
+Downloading scikit_learn-1.7.1-cp310-cp310-win_amd64.whl (8.9 MB)
+Downloading llvmlite-0.44.0-cp310-cp310-win_amd64.whl (30.3 MB)
+Downloading pooch-1.8.2-py3-none-any.whl (64 kB)
+Downloading scikit_learn-1.7.1-cp310-cp310-win_amd64.whl (8.9 MB)
+Downloading scikit_learn-1.7.1-cp310-cp310-win_amd64.whl (8.9 MB)
+Downloading soxr-0.5.0.post1-cp310-cp310-win_amd64.whl (166 kB)
+Downloading threadpoolctl-3.6.0-py3-none-any.whl (18 kB)
+Installing collected packages: threadpoolctl, soxr, msgpack, llvmlite, lazy_loader, joblib, audioread, soundfile, scikit-learn, pooch, numba, librosa
+Successfully installed audioread-3.0.1 joblib-1.5.2 lazy_loader-0.4 librosa-0.11.0 llvmlite-0.44.0 msgpack-1.1.1 numba-0.61.2 pooch-1.8.2 scikit-learn-1.7.1 soundfile-0.13.1 soxr-0.5.0.post1 threadpoolctl-3.6.0
+
+#(Tugas1) PS C:\Semester 7\STM\Tugas1> pip install opencv-python pillow scikit-image matplotlib
+Collecting opencv-python
+  Downloading opencv_python-4.12.0.88-cp37-abi3-win_amd64.whl.metadata (19 kB)
+Requirement already satisfied: pillow in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (11.1.0)
+Collecting scikit-image
+  Downloading scikit_image-0.25.2-cp310-cp310-win_amd64.whl.metadata (14 kB)
+Requirement already satisfied: matplotlib in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (3.10.0)
+Requirement already satisfied: numpy<2.3.0,>=2 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from opencv-python) (2.2.3)
+Requirement already satisfied: scipy>=1.11.4 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from scikit-image) (1.15.3)
+Collecting networkx>=3.0 (from scikit-image)
+  Downloading networkx-3.4.2-py3-none-any.whl.metadata (6.3 kB)
+Collecting imageio!=2.35.0,>=2.33 (from scikit-image)
+  Downloading imageio-2.37.0-py3-none-any.whl.metadata (5.2 kB)
+Collecting tifffile>=2022.8.12 (from scikit-image)
+  Downloading tifffile-2025.5.10-py3-none-any.whl.metadata (31 kB)
+Requirement already satisfied: packaging>=21 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from scikit-image) (24.0)
+Requirement already satisfied: lazy-loader>=0.4 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from scikit-image) (0.4)
+Requirement already satisfied: contourpy>=1.0.1 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from matplotlib) (1.3.1)    
+Requirement already satisfied: cycler>=0.10 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from matplotlib) (0.12.1)       
+Requirement already satisfied: fonttools>=4.22.0 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from matplotlib) (4.56.0)
+Requirement already satisfied: kiwisolver>=1.3.1 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from matplotlib) (1.4.8)   
+Requirement already satisfied: pyparsing>=2.3.1 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from matplotlib) (3.2.1)    
+Requirement already satisfied: python-dateutil>=2.7 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from matplotlib) (2.9.0.post0)     
+Requirement already satisfied: six>=1.5 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from python-dateutil>=2.7->matplotlib) (1.17.0)
+Downloading opencv_python-4.12.0.88-cp37-abi3-win_amd64.whl (39.0 MB)
+Downloading scikit_image-0.25.2-cp310-cp310-win_amd64.whl (12.8 MB)
+Downloading imageio-2.37.0-py3-none-any.whl (315 kB)
+Downloading networkx-3.4.2-py3-none-any.whl (1.7 MB)
+Downloading tifffile-2025.5.10-py3-none-any.whl (226 kB)
+Installing collected packages: tifffile, opencv-python, networkx, imageio, scikit-image
+Successfully installed imageio-2.37.0 networkx-3.4.2 opencv-python-4.12.0.88 scikit-image-0.25.2 tifffile-2025.5.10
+
+#(Tugas1) PS C:\Semester 7\STM\Tugas1> pip install moviepy
+Collecting moviepy
+  Downloading moviepy-2.2.1-py3-none-any.whl.metadata (6.9 kB)
+Requirement already satisfied: decorator<6.0,>=4.0.2 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from moviepy) (5.2.1)
+Requirement already satisfied: imageio<3.0,>=2.5 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from moviepy) (2.37.0)
+Collecting imageio_ffmpeg>=0.2.0 (from moviepy)
+  Downloading imageio_ffmpeg-0.6.0-py3-none-win_amd64.whl.metadata (1.5 kB)
+Requirement already satisfied: numpy>=1.25.0 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from moviepy) (2.2.3)
+Collecting proglog<=1.0.0 (from moviepy)
+  Downloading proglog-0.1.12-py3-none-any.whl.metadata (794 bytes)
+Collecting python-dotenv>=0.10 (from moviepy)
+  Downloading python_dotenv-1.1.1-py3-none-any.whl.metadata (24 kB)
+Requirement already satisfied: pillow<12.0,>=9.2.0 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from moviepy) (11.1.0)
+Collecting tqdm (from proglog<=1.0.0->moviepy)
+  Downloading tqdm-4.67.1-py3-none-any.whl.metadata (57 kB)
+Requirement already satisfied: colorama in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from tqdm->proglog<=1.0.0->moviepy) (0.4.6)
+Downloading moviepy-2.2.1-py3-none-any.whl (129 kB)
+Downloading proglog-0.1.12-py3-none-any.whl (6.3 kB)
+Downloading imageio_ffmpeg-0.6.0-py3-none-win_amd64.whl (31.2 MB)
+Downloading python_dotenv-1.1.1-py3-none-any.whl (20 kB)
+Downloading tqdm-4.67.1-py3-none-any.whl (78 kB)
+Installing collected packages: tqdm, python-dotenv, imageio_ffmpeg, proglog, moviepy
+Successfully installed imageio_ffmpeg-0.6.0 moviepy-2.2.1 proglog-0.1.12 python-dotenv-1.1.1 tqdm-4.67.1
+
+#(Tugas1) PS C:\Semester 7\STM\Tugas1> pip install numpy pandas jupyter
+Requirement already satisfied: numpy in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (2.2.3)
+Requirement already satisfied: pandas in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (2.2.3)
+Collecting jupyter
+  Downloading jupyter-1.1.1-py2.py3-none-any.whl.metadata (2.0 kB)
+Requirement already satisfied: python-dateutil>=2.8.2 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from pandas) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from pandas) (2025.1)
+Requirement already satisfied: tzdata>=2022.7 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from pandas) (2025.1)
+Requirement already satisfied: notebook in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter) (7.4.3)
+Collecting jupyter-console (from jupyter)
+  Downloading jupyter_console-6.6.3-py3-none-any.whl.metadata (5.8 kB)
+Requirement already satisfied: nbconvert in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter) (7.16.6)
+Requirement already satisfied: ipykernel in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter) (6.29.5)
+Collecting ipywidgets (from jupyter)
+  Downloading ipywidgets-8.1.7-py3-none-any.whl.metadata (2.4 kB)
+Requirement already satisfied: jupyterlab in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter) (4.4.3)
+Requirement already satisfied: six>=1.5 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from python-dateutil>=2.8.2->pandas) (1.17.0)
+Requirement already satisfied: comm>=0.1.1 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipykernel->jupyter) (0.2.2)
+Requirement already satisfied: debugpy>=1.6.5 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipykernel->jupyter) (1.8.12)        
+Requirement already satisfied: ipython>=7.23.1 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipykernel->jupyter) (8.32.0)       
+Requirement already satisfied: jupyter-client>=6.1.12 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipykernel->jupyter) (7.4.9) 
+Requirement already satisfied: jupyter-core!=5.0.*,>=4.12 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipykernel->jupyter) (5.7.2)
+Requirement already satisfied: matplotlib-inline>=0.1 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipykernel->jupyter) (0.1.7) 
+Requirement already satisfied: nest-asyncio in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipykernel->jupyter) (1.6.0)
+Requirement already satisfied: packaging in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from ipykernel->jupyter) (24.0)
+Requirement already satisfied: psutil in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipykernel->jupyter) (7.0.0)
+Requirement already satisfied: pyzmq>=24 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipykernel->jupyter) (24.0.1)
+Requirement already satisfied: tornado>=6.1 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipykernel->jupyter) (6.4.2)
+Requirement already satisfied: traitlets>=5.4.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipykernel->jupyter) (5.14.3)      
+Requirement already satisfied: colorama in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipython>=7.23.1->ipykernel->jupyter) (0.4.6)
+Requirement already satisfied: decorator in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipython>=7.23.1->ipykernel->jupyter) (5.2.1)
+Requirement already satisfied: exceptiongroup in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipython>=7.23.1->ipykernel->jupyter) (1.2.2)
+Requirement already satisfied: jedi>=0.16 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipython>=7.23.1->ipykernel->jupyter) (0.19.2)
+Requirement already satisfied: prompt_toolkit<3.1.0,>=3.0.41 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipython>=7.23.1->ipykernel->jupyter) (3.0.50)
+Requirement already satisfied: pygments>=2.4.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipython>=7.23.1->ipykernel->jupyter) (2.19.1)
+Requirement already satisfied: stack_data in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipython>=7.23.1->ipykernel->jupyter) (0.6.3)
+Requirement already satisfied: typing_extensions>=4.6 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from ipython>=7.23.1->ipykernel->jupyter) (4.12.2)
+Requirement already satisfied: wcwidth in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from prompt_toolkit<3.1.0,>=3.0.41->ipython>=7.23.1->ipykernel->jupyter) (0.2.13)
+Requirement already satisfied: parso<0.9.0,>=0.8.4 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jedi>=0.16->ipython>=7.23.1->ipykernel->jupyter) (0.8.4)
+Requirement already satisfied: entrypoints in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter-client>=6.1.12->ipykernel->jupyter) (0.4)
+Requirement already satisfied: platformdirs>=2.5 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter-core!=5.0.*,>=4.12->ipykernel->jupyter) (4.3.6)
+Requirement already satisfied: pywin32>=300 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter-core!=5.0.*,>=4.12->ipykernel->jupyter) (308)
+Collecting widgetsnbextension~=4.0.14 (from ipywidgets->jupyter)
+  Downloading widgetsnbextension-4.0.14-py3-none-any.whl.metadata (1.6 kB)
+Collecting jupyterlab_widgets~=3.0.15 (from ipywidgets->jupyter)
+  Downloading jupyterlab_widgets-3.0.15-py3-none-any.whl.metadata (20 kB)
+Requirement already satisfied: async-lru>=1.0.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyterlab->jupyter) (2.0.5)
+Requirement already satisfied: httpx>=0.25.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyterlab->jupyter) (0.28.1)
+Requirement already satisfied: jinja2>=3.0.3 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyterlab->jupyter) (3.1.6)
+Requirement already satisfied: jupyter-lsp>=2.0.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyterlab->jupyter) (2.2.5)    
+Requirement already satisfied: jupyter-server<3,>=2.4.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyterlab->jupyter) (2.16.0)
+Requirement already satisfied: jupyterlab-server<3,>=2.27.1 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyterlab->jupyter) (2.27.3)
+Requirement already satisfied: notebook-shim>=0.2 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyterlab->jupyter) (0.2.4)    
+Requirement already satisfied: setuptools>=41.1.0 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from jupyterlab->jupyter) (80.4.0)
+Requirement already satisfied: tomli>=1.2.2 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyterlab->jupyter) (2.2.1)
+Requirement already satisfied: anyio>=3.1.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (4.9.0)
+Requirement already satisfied: argon2-cffi>=21.1 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (23.1.0)
+Requirement already satisfied: jupyter-events>=0.11.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (0.12.0)
+Requirement already satisfied: jupyter-server-terminals>=0.4.4 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (0.5.3)
+Requirement already satisfied: nbformat>=5.3.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (5.10.4)
+Requirement already satisfied: overrides>=5.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (7.7.0)
+Requirement already satisfied: prometheus-client>=0.9 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (0.22.0)
+Requirement already satisfied: pywinpty>=2.0.1 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (2.0.15)
+Requirement already satisfied: send2trash>=1.8.2 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (1.8.3)
+Requirement already satisfied: terminado>=0.8.3 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (0.18.1)
+Requirement already satisfied: websocket-client>=1.7 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (1.8.0)
+Requirement already satisfied: babel>=2.10 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyterlab-server<3,>=2.27.1->jupyterlab->jupyter) (2.17.0)
+Requirement already satisfied: json5>=0.9.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyterlab-server<3,>=2.27.1->jupyterlab->jupyter) (0.12.0)
+Requirement already satisfied: jsonschema>=4.18.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyterlab-server<3,>=2.27.1->jupyterlab->jupyter) (4.24.0)
+Requirement already satisfied: requests>=2.31 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from jupyterlab-server<3,>=2.27.1->jupyterlab->jupyter) (2.32.3)
+Requirement already satisfied: idna>=2.8 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from anyio>=3.1.0->jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (3.10)
+Requirement already satisfied: sniffio>=1.1 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from anyio>=3.1.0->jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (1.3.1)
+Requirement already satisfied: argon2-cffi-bindings in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from argon2-cffi>=21.1->jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (21.2.0)
+Requirement already satisfied: certifi in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from httpx>=0.25.0->jupyterlab->jupyter) (2025.4.26)
+Requirement already satisfied: httpcore==1.* in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from httpx>=0.25.0->jupyterlab->jupyter) (1.0.9)
+Requirement already satisfied: h11>=0.16 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from httpcore==1.*->httpx>=0.25.0->jupyterlab->jupyter) (0.16.0)
+Requirement already satisfied: MarkupSafe>=2.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jinja2>=3.0.3->jupyterlab->jupyter) (3.0.2)
+Requirement already satisfied: attrs>=22.2.0 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from jsonschema>=4.18.0->jupyterlab-server<3,>=2.27.1->jupyterlab->jupyter) (25.1.0)
+Requirement already satisfied: jsonschema-specifications>=2023.03.6 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jsonschema>=4.18.0->jupyterlab-server<3,>=2.27.1->jupyterlab->jupyter) (2025.4.1)
+Requirement already satisfied: referencing>=0.28.4 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jsonschema>=4.18.0->jupyterlab-server<3,>=2.27.1->jupyterlab->jupyter) (0.36.2)
+Requirement already satisfied: rpds-py>=0.7.1 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jsonschema>=4.18.0->jupyterlab-server<3,>=2.27.1->jupyterlab->jupyter) (0.25.1)
+Requirement already satisfied: python-json-logger>=2.0.4 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter-events>=0.11.0->jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (3.3.0)
+Requirement already satisfied: pyyaml>=5.3 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter-events>=0.11.0->jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (6.0.2)
+Requirement already satisfied: rfc3339-validator in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter-events>=0.11.0->jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (0.1.4)
+Requirement already satisfied: rfc3986-validator>=0.1.1 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jupyter-events>=0.11.0->jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (0.1.1)
+Requirement already satisfied: fqdn in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jsonschema[format-nongpl]>=4.18.0->jupyter-events>=0.11.0->jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (1.5.1)
+Requirement already satisfied: isoduration in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jsonschema[format-nongpl]>=4.18.0->jupyter-events>=0.11.0->jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (20.11.0)
+Requirement already satisfied: jsonpointer>1.13 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jsonschema[format-nongpl]>=4.18.0->jupyter-events>=0.11.0->jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (3.0.0)
+Requirement already satisfied: uri-template in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jsonschema[format-nongpl]>=4.18.0->jupyter-events>=0.11.0->jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (1.3.0)
+Requirement already satisfied: webcolors>=24.6.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from jsonschema[format-nongpl]>=4.18.0->jupyter-events>=0.11.0->jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (24.11.1)
+Requirement already satisfied: beautifulsoup4 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from nbconvert->jupyter) (4.13.4)
+Requirement already satisfied: bleach!=5.0.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from bleach[css]!=5.0.0->nbconvert->jupyter) (6.2.0)
+Requirement already satisfied: defusedxml in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from nbconvert->jupyter) (0.7.1)
+Requirement already satisfied: jupyterlab-pygments in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from nbconvert->jupyter) (0.3.0)    
+Requirement already satisfied: mistune<4,>=2.0.3 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from nbconvert->jupyter) (3.1.3)      
+Requirement already satisfied: nbclient>=0.5.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from nbconvert->jupyter) (0.10.2)       
+Requirement already satisfied: pandocfilters>=1.4.1 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from nbconvert->jupyter) (1.5.1)   
+Requirement already satisfied: webencodings in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from bleach!=5.0.0->bleach[css]!=5.0.0->nbconvert->jupyter) (0.5.1)
+Requirement already satisfied: tinycss2<1.5,>=1.1.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from bleach[css]!=5.0.0->nbconvert->jupyter) (1.4.0)
+Requirement already satisfied: fastjsonschema>=2.15 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from nbformat>=5.3.0->jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (2.21.1)
+Requirement already satisfied: charset-normalizer<4,>=2 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from requests>=2.31->jupyterlab-server<3,>=2.27.1->jupyterlab->jupyter) (3.4.1)
+Requirement already satisfied: urllib3<3,>=1.21.1 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from requests>=2.31->jupyterlab-server<3,>=2.27.1->jupyterlab->jupyter) (2.3.0)
+Requirement already satisfied: cffi>=1.0.1 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from argon2-cffi-bindings->argon2-cffi>=21.1->jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (1.17.1)
+Requirement already satisfied: pycparser in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from cffi>=1.0.1->argon2-cffi-bindings->argon2-cffi>=21.1->jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (2.22)
+Requirement already satisfied: soupsieve>1.2 in c:\users\hizkia christovita\appdata\local\programs\python\python310\lib\site-packages (from beautifulsoup4->nbconvert->jupyter) (2.7)
+Requirement already satisfied: arrow>=0.15.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from isoduration->jsonschema[format-nongpl]>=4.18.0->jupyter-events>=0.11.0->jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (1.3.0)
+Requirement already satisfied: types-python-dateutil>=2.8.10 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from arrow>=0.15.0->isoduration->jsonschema[format-nongpl]>=4.18.0->jupyter-events>=0.11.0->jupyter-server<3,>=2.4.0->jupyterlab->jupyter) (2.9.0.20250516)
+Requirement already satisfied: executing>=1.2.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from stack_data->ipython>=7.23.1->ipykernel->jupyter) (2.2.0)
+Requirement already satisfied: asttokens>=2.1.0 in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from stack_data->ipython>=7.23.1->ipykernel->jupyter) (3.0.0)
+Requirement already satisfied: pure-eval in c:\users\hizkia christovita\appdata\roaming\python\python310\site-packages (from stack_data->ipython>=7.23.1->ipykernel->jupyter) (0.2.3)
+Downloading jupyter-1.1.1-py2.py3-none-any.whl (2.7 kB)
+Downloading ipywidgets-8.1.7-py3-none-any.whl (139 kB)
+Downloading jupyterlab_widgets-3.0.15-py3-none-any.whl (216 kB)
+Downloading widgetsnbextension-4.0.14-py3-none-any.whl (2.2 MB)
+Downloading jupyter_console-6.6.3-py3-none-any.whl (24 kB)
+Installing collected packages: widgetsnbextension, jupyterlab_widgets, ipywidgets, jupyter-console, jupyter
+Successfully installed ipywidgets-8.1.7 jupyter-1.1.1 jupyter-console-6.6.3 jupyterlab_widgets-3.0.15 widgetsnbextension-4.0.14
+\end{lstlisting}
+    \item Daftar library yang berhasil diinstall dengan versinya
+\begin{lstlisting}[language=bash]
+#(Tugas1) PS C:\Semester 7\STM\Tugas1> uv pip install librosa soundfile scipy
+Using Python 3.10.2 environment at: Tugas1
+Resolved 25 packages in 5.08s
+Prepared 25 packages in 23.74s
+Installed 25 packages in 1.77s
+ + audioread==3.0.1                                                                                                                                                   
+ + certifi==2025.8.3                                                                                                                                                  
+ + cffi==1.17.1                                                                                                                                                       
+ + charset-normalizer==3.4.3                                                                                                                                          
+ + decorator==5.2.1                                                                                                                                                   
+ + idna==3.10                                                                                                                                                         
+ + joblib==1.5.2                                                                                                                                                      
+ + lazy-loader==0.4                                                                                                                                                   
+ + librosa==0.11.0                                                                                                                                                    
+ + llvmlite==0.44.0
+ + msgpack==1.1.1
+ + numba==0.61.2
+ + numpy==2.2.6
+ + packaging==25.0
+ + platformdirs==4.4.0
+ + pooch==1.8.2
+ + pycparser==2.22
+ + requests==2.32.5
+ + scikit-learn==1.7.1
+ + scipy==1.15.3
+ + soundfile==0.13.1
+ + soxr==0.5.0.post1
+ + threadpoolctl==3.6.0
+ + typing-extensions==4.15.0
+ + urllib3==2.5.0
+
+#(Tugas1) PS C:\Semester 7\STM\Tugas1> uv pip install opencv-python pillow scikit-image matplotlib
+Using Python 3.10.2 environment at: Tugas1
+Resolved 18 packages in 2.96s                                                                                                                                         
+Prepared 14 packages in 19.03s
+Installed 14 packages in 966ms
+ + contourpy==1.3.2                                                                                                                                                   
+ + cycler==0.12.1                                                                                                                                                     
+ + fonttools==4.59.2                                                                                                                                                  
+ + imageio==2.37.0                                                                                                                                                    
+ + kiwisolver==1.4.9                                                                                                                                                  
+ + matplotlib==3.10.5                                                                                                                                                 
+ + networkx==3.4.2                                                                                                                                                    
+ + opencv-python==4.12.0.88                                                                                                                                           
+ + pillow==11.3.0                                                                                                                                                     
+ + pyparsing==3.2.3
+ + python-dateutil==2.9.0.post0
+ + scikit-image==0.25.2
+ + six==1.17.0
+ + tifffile==2025.5.10
+
+#(Tugas1) PS C:\Semester 7\STM\Tugas1> uv pip install moviepy
+Using Python 3.10.2 environment at: Tugas1
+Resolved 10 packages in 816ms
+Prepared 6 packages in 5.89s
+Installed 6 packages in 111ms
+ + colorama==0.4.6                                                                                                                                                    
+ + imageio-ffmpeg==0.6.0                                                                                                                                              
+ + moviepy==2.2.1                                                                                                                                                     
+ + proglog==0.1.12                                                                                                                                                    
+ + python-dotenv==1.1.1                                                                                                                                               
+ + tqdm==4.67.1
+        
+#(Tugas1) PS C:\Semester 7\STM\Tugas1> uv pip install numpy pandas jupyter
+Using Python 3.10.2 environment at: Tugas1
+Resolved 105 packages in 4.25s
+Prepared 90 packages in 35.20s                                                                                                                                        
+Installed 90 packages in 6.09s
+ + anyio==4.10.0                                                                                                                                                      
+ + argon2-cffi==25.1.0                                                                                                                                                
+ + argon2-cffi-bindings==25.1.0                                                                                                                                       
+ + arrow==1.3.0                                                                                                                                                       
+ + asttokens==3.0.0                                                                                                                                                   
+ + async-lru==2.0.5                                                                                                                                                   
+ + attrs==25.3.0                                                                                                                                                      
+ + babel==2.17.0                                                                                                                                                      
+ + beautifulsoup4==4.13.5                                                                                                                                             
+ + bleach==6.2.0
+ + comm==0.2.3
+ + debugpy==1.8.16
+ + defusedxml==0.7.1
+ + exceptiongroup==1.3.0
+ + executing==2.2.0
+ + fastjsonschema==2.21.2
+ + fqdn==1.5.1
+ + h11==0.16.0
+ + httpcore==1.0.9
+ + httpx==0.28.1
+ + ipykernel==6.30.1
+ + ipython==8.37.0
+ + ipywidgets==8.1.7
+ + isoduration==20.11.0
+ + jedi==0.19.2
+ + jinja2==3.1.6
+ + json5==0.12.1
+ + jsonpointer==3.0.0
+ + jsonschema==4.25.1
+ + jsonschema-specifications==2025.4.1
+ + jupyter==1.1.1
+ + jupyter-client==8.6.3
+ + jupyter-console==6.6.3
+ + jupyter-core==5.8.1
+ + jupyter-events==0.12.0
+ + jupyter-lsp==2.3.0
+ + jupyter-server==2.17.0
+ + jupyter-server-terminals==0.5.3
+ + jupyterlab==4.4.6
+ + jupyterlab-pygments==0.3.0
+ + jupyterlab-server==2.27.3
+ + jupyterlab-widgets==3.0.15
+ + lark==1.2.2
+ + markupsafe==3.0.2
+ + matplotlib-inline==0.1.7
+ + mistune==3.1.3
+ + nbclient==0.10.2
+ + nbconvert==7.16.6
+ + nbformat==5.10.4
+ + nest-asyncio==1.6.0
+ + notebook==7.4.5
+ + notebook-shim==0.2.4
+ + overrides==7.7.0
+ + pandas==2.3.2
+ + pandocfilters==1.5.1
+ + parso==0.8.5
+ + prometheus-client==0.22.1
+ + prompt-toolkit==3.0.52
+ + psutil==7.0.0
+ + pure-eval==0.2.3
+ + pygments==2.19.2
+ + python-json-logger==3.3.0
+ + pytz==2025.2
+ + pywin32==311
+ + pywinpty==3.0.0
+ + pyyaml==6.0.2
+ + pyzmq==27.0.2
+ + referencing==0.36.2
+ + rfc3339-validator==0.1.4
+ + rfc3986-validator==0.1.1
+ + rfc3987-syntax==1.1.0
+ + rpds-py==0.27.1
+ + send2trash==1.8.3
+ + setuptools==80.9.0
+ + sniffio==1.3.1
+ + soupsieve==2.8
+ + stack-data==0.6.3
+ + terminado==0.18.1
+ + tinycss2==1.4.0
+ + tomli==2.2.1
+ + tornado==6.5.2
+ + traitlets==5.14.3
+ + types-python-dateutil==2.9.0.20250822
+ + tzdata==2025.2
+ + uri-template==1.3.0
+ + wcwidth==0.2.13
+ + webcolors==24.11.1
+ + webencodings==0.5.1
+ + websocket-client==1.8.0
+ + widgetsnbextension==4.0.14
+\end{lstlisting}
+\end{itemize}
+
+\subsection{Bagian 3: Verifikasi Instalasi}
+Buat file Python sederhana untuk menguji semua library yang telah diinstall:
+\begin{lstlisting}[language=Python, caption= Test Verifikasi Instalasi Sederhana]
+# Verifikasi Instalasi
+
+print("=== Verifikasi Library Tugas1 ===")
+
+try:
+    import numpy as np
+    import pandas as pd
+    import scipy
+    import librosa
+    import soundfile as sf
+    import cv2
+    from PIL import Image
+    import skimage
+    import matplotlib.pyplot as plt
+    import moviepy as mp
+    import sklearn
+    import jupyter
+
+    print("[OK] Semua library berhasil diimport!!")
+except ImportError as e:
+    print(f"[ERROR] Gagal import: {e}")
+\end{lstlisting}
+
+\textbf{Jalankan script dan dokumentasikan hasilnya:}
+
+\subsection{Bagian 4: Simple Test dengan Sample Code}
+Buat dan jalankan contoh sederhana untuk setiap kategori multimedia:
+
+\subsubsection{Test Audio Processing}
+\begin{lstlisting}[language=Python, caption=Test audio processing sederhana]
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate simple sine wave
+duration = 2  # seconds
+sample_rate = 44100
+frequency = 440  # A4 note
+
+t = np.linspace(0, duration, int(sample_rate * duration))
+audio_signal = np.sin(2 * np.pi * frequency * t)
+
+# Plot waveform
+plt.figure(figsize=(10, 4))
+plt.plot(t[:1000], audio_signal[:1000])  # Plot first 1000 samples
+plt.title('Sine Wave (440 Hz)')
+plt.xlabel('Time (s)')
+plt.ylabel('Amplitude')
+plt.grid(True)
+plt.savefig('sine_wave_test.png', dpi=150, bbox_inches='tight')
+plt.show()
+
+print(f"Generated {duration}s sine wave at {frequency}Hz")
+print(f"Sample rate: {sample_rate}Hz")
+print(f"Total samples: {len(audio_signal)}")
+\end{lstlisting}
+
+\subsubsection{Test Image Processing}
+\begin{lstlisting}[language=Python, caption=Test image processing sederhana]
+import numpy as np
+import matplotlib.pyplot as plt
+from PIL import Image
+
+# Create a simple test image
+width, height = 400, 300
+image = np.zeros((height, width, 3), dtype=np.uint8)
+
+# Add some patterns
+image[:, :width//3, 0] = 255  # Red section
+image[:, width//3:2*width//3, 1] = 255  # Green section
+image[:, 2*width//3:, 2] = 255  # Blue section
+
+# Add a white circle in the center
+center_x, center_y = width//2, height//2
+radius = 50
+Y, X = np.ogrid[:height, :width]
+mask = (X - center_x)**2 + (Y - center_y)**2 <= radius**2
+image[mask] = [255, 255, 255]
+
+# Display and save
+plt.figure(figsize=(8, 6))
+plt.imshow(image)
+plt.title('Test Image with RGB Stripes and White Circle')
+plt.axis('off')
+plt.savefig('test_image.png', dpi=150, bbox_inches='tight')
+plt.show()
+
+print(f"Created test image: {width}x{height} pixels")
+print(f"Image shape: {image.shape}")
+print(f"Image dtype: {image.dtype}")
+\end{lstlisting}
+
+\textbf{Dokumentasikan hasil eksekusi:}
+\begin{itemize}
+    \item Screenshot output dari kedua script di atas
+    \item Gambar yang dihasilkan (sine\_wave\_test.png dan test\_image.png)
+    \item Error message jika ada dan cara mengatasinya
+\end{itemize}
+
+\section{Bagian Laporan}
+
+\subsection{Output Verifikasi Instalasi}
+\textbf{Copy-paste output lengkap dari script \texttt{test\_multimedia.py} di sini:}
+
+\begin{lstlisting}[language=Python, caption=Output verifikasi instalasi]
+#(Tugas1) PS C:\Semester 7\STM\Tugas1> python test_multimedia.py
+=== Verifikasi Library Tugas1 ===
+[OK] Semua library berhasil diimport!!
+Generated 2s sine wave at 440Hz
+Sample rate: 44100Hz
+Total samples: 88200
+Created test image: 400x300 pixels
+Image shape: (300, 400, 3)
+Image dtype: uint8
+\end{lstlisting}
+
+\subsection{Screenshot Hasil Test}
+\textbf{Sisipkan screenshot atau gambar hasil dari:}
+\begin{itemize}
+    \item Terminal/command prompt yang menunjukkan environment aktif
+
+    \begin{center}
+        \includegraphics[width=12cm]{Figure/env_aktif.png}\\
+        \textit{Environment aktif di terminal ditandai dengan (Tugas1)}
+    \end{center}
+
+    \item Output dari script test audio (sine wave plot)
+
+    \begin{center}
+        \includegraphics[width=12cm]{Figure/sine_wave_test.png}\\
+        \textit{Output plot dari script test audio (sine wave)}
+    \end{center}
+
+    \item Output dari script test image (RGB stripes dengan circle)
+
+    \begin{center}
+        \includegraphics[width=10cm]{Figure/test_image.png}\\
+        \textit{Output plot dari script test image (RGB stripes dengan circle)}
+    \end{center}
+\end{itemize}
+
+\textit{Gunakan perintah \textbackslash\texttt{includegraphics} untuk menyisipkan gambar}
+
+\subsection{Analisis dan Refleksi}
+\textbf{Jawab pertanyaan berikut:}
+
+\begin{enumerate}
+    \item \textbf{Mengapa penting menggunakan environment terpisah untuk project multimedia?}
+    
+    \textit{Menurut saya karena setiap proyek multimedia memerlukan versi library yang berbeda. Dengan menggunakan environment terpisah, kita dapat menghindari konflik dependency dan memastikan bahwa proyek berjalan dengan versi library yang sesuai tanpa mengganggu proyek lain.}
+    
+    \item \textbf{Apa perbedaan utama antara conda, venv, dan uv? Mengapa Anda memilih tool yang Anda gunakan?}
+    
+    \textit{Perbedaan utama nya adalah conda adalah package manager yang juga bisa mengelola environment dan mendukung berbagai bahasa pemrograman, sedangkan venv dan uv adalah tools bawaan Python untuk membuat virtual environment. Saya memilih uv karena lebih ringan dan cepat dibandingkan conda, serta mudah digunakan untuk proyek Python sederhana seperti ini.}
+    
+    \item \textbf{Library mana yang paling sulit diinstall dan mengapa?}
+    
+    \textit{Untuk proyek saya ini belum ada library yang sulit diinstall. Semua library bisa diinstall dengan lancar menggunakan uv dan pip.}
+    
+    \item \textbf{Bagaimana cara mengatasi masalah dependency conflict jika terjadi?}
+    
+    \textit{Dengan cara membuat environment terpisah atau bisa juga dengan membuat environment baru dan menginstall ulang library yang diperlukan. Bisa juga dengan menggunakan versi spesifik dari library yang kompatibel satu sama lain.}
+    
+    \item \textbf{Jelaskan fungsi dari masing-masing library yang berhasil Anda install!}
+    
+    \textit{Fungsi dari library yang berhasil diinstall adalah sebagai berikut:
+    \begin{itemize}
+        \item numpy: untuk komputasi numerik dan manipulasi array
+        \item pandas: untuk manipulasi dan analisis data
+        \item scipy: untuk komputasi ilmiah dan teknik
+        \item librosa: untuk analisis dan pemrosesan audio
+        \item soundfile: untuk membaca dan menulis file audio
+        \item opencv-python: untuk pemrosesan gambar dan video
+        \item pillow: untuk manipulasi gambar
+        \item scikit-image: untuk pemrosesan gambar
+        \item matplotlib: untuk visualisasi data
+        \item moviepy: untuk pengolahan video
+        \item scikit-learn: untuk machine learning
+        \item jupyter: untuk membuat dan berbagi dokumen yang berisi kode, visualisasi, dan teks naratif
+    \end{itemize}}
+\end{enumerate}
+
+\subsection{Troubleshooting}
+\textbf{Dokumentasikan masalah yang Anda hadapi (jika ada) dan cara mengatasinya:}
+
+\begin{itemize}
+    \item \textbf{Masalah 1:} \textit{Ketika ingin menyisipkan gambar menggunakan begin figure dan end figure di dalam itemize, gambar bisa loncat ke halaman lain karena figure adalah float}
+    
+    \textbf{Solusi:} \textit{Caranya bisa dengan pisahkan dulu list dan figurenya dan jangan letakkan langsung di dalam itemize. Bisa juga dengan menambahkan package float dan menggunakan [H] pada begin figure agar gambarnya tidak loncat ke halaman lain}
+    
+    \item \textbf{Masalah 2:} \textit{}
+    
+    \textbf{Solusi:} \textit{[Cara mengatasi]}
+\end{itemize}
+
+\section{Export Environment untuk Reproduksi}
+Sebagai langkah terakhir, export environment Anda agar dapat direproduksi:
+
+\subsection{Untuk Conda}
+\begin{lstlisting}[language=bash, caption=Export conda environment]
+conda env export > environment.yml
+\end{lstlisting}
+
+\subsection{Untuk venv/uv}
+\begin{lstlisting}[language=bash, caption=Export pip requirements]
+pip freeze > requirements.txt
+\end{lstlisting}
+
+\textbf{Copy-paste isi file environment.yml atau requirements.txt di sini:}
+\begin{lstlisting}[caption=Environment/Requirements file]
+[aiobotocore==2.20.0
+aiohappyeyeballs==2.4.6
+aiohttp==3.11.13
+aioitertools==0.12.0
+aiosignal==1.3.2
+altgraph==0.17.4
+anyio==4.9.0
+argon2-cffi==23.1.0
+argon2-cffi-bindings==21.2.0
+arrow==1.3.0
+asttokens==3.0.0
+async-lru==2.0.5
+async-timeout==5.0.1
+attrs==25.1.0
+audioread==3.0.1
+babel==2.17.0
+beautifulsoup4==4.13.4
+bleach==6.2.0
+boto3==1.37.1
+botocore==1.37.2
+certifi==2025.4.26
+cffi==1.17.1
+charset-normalizer==3.4.1
+colorama==0.4.6
+comm==0.2.2
+contourpy==1.3.1
+cramjam==2.9.1
+customtkinter==5.2.2
+cycler==0.12.1
+darkdetect==0.8.0
+debugpy==1.8.12
+decorator==5.2.1
+defusedxml==0.7.1
+entrypoints==0.4
+exceptiongroup==1.2.2
+executing==2.2.0
+fastjsonschema==2.21.1
+fastparquet==2024.11.0
+fonttools==4.56.0
+fqdn==1.5.1
+frozenlist==1.5.0
+fsspec==2025.2.0
+greenlet==3.2.2
+h11==0.16.0
+httpcore==1.0.9
+httpx==0.28.1
+hupper==1.12.1
+idna==3.10
+imageio==2.37.0
+imageio-ffmpeg==0.6.0
+ipykernel==6.29.5
+ipython==8.32.0
+ipywidgets==8.1.7
+isoduration==20.11.0
+jedi==0.19.2
+Jinja2==3.1.6
+jmespath==1.0.1
+joblib==1.5.2
+json5==0.12.0
+jsonpointer==3.0.0
+jsonschema==4.24.0
+jsonschema-specifications==2025.4.1
+jupyter==1.1.1
+jupyter-console==6.6.3
+jupyter-events==0.12.0
+jupyter-lsp==2.2.5
+jupyter_client==7.4.9
+jupyter_core==5.7.2
+jupyter_server==2.16.0
+jupyter_server_terminals==0.5.3
+jupyterlab==4.4.3
+jupyterlab_pygments==0.3.0
+jupyterlab_server==2.27.3
+jupyterlab_widgets==3.0.15
+kiwisolver==1.4.8
+lazy_loader==0.4
+librosa==0.11.0
+llvmlite==0.44.0
+MarkupSafe==3.0.2
+matplotlib==3.10.0
+matplotlib-inline==0.1.7
+mistune==3.1.3
+moviepy==2.2.1
+msgpack==1.1.1
+multidict==6.1.0
+nbclient==0.10.2
+nbconvert==7.16.6
+nbformat==5.10.4
+nest-asyncio==1.6.0
+networkx==3.4.2
+notebook==7.4.3
+notebook_shim==0.2.4
+numba==0.61.2
+numpy==2.2.3
+opencv-python==4.12.0.88
+overrides==7.7.0
+packaging==24.0
+pandas==2.2.3
+pandocfilters==1.5.1
+parso==0.8.4
+PasteDeploy==3.1.0
+pefile==2023.2.7
+pillow==11.1.0
+plaster==1.1.2
+plaster-pastedeploy==1.0.1
+platformdirs==4.3.6
+pooch==1.8.2
+proglog==0.1.12
+prometheus_client==0.22.0
+prompt_toolkit==3.0.50
+propcache==0.3.0
+psutil==7.0.0
+psycopg2-binary==2.9.10
+pure_eval==0.2.3
+pyarrow==19.0.1
+PyAthena==3.12.2
+pycparser==2.22
+pycryptodome==3.23.0
+pygame==2.5.2
+Pygments==2.19.1
+pyinstaller==6.7.0
+pyinstaller-hooks-contrib==2024.6
+PyJWT==2.10.1
+pyparsing==3.2.1
+pyramid==2.0.2
+pyramid-jwt==1.6.1
+python-dateutil==2.9.0.post0
+python-dotenv==1.1.1
+python-json-logger==3.3.0
+pytz==2025.1
+pywin32==308
+pywin32-ctypes==0.2.2
+pywinpty==2.0.15
+PyYAML==6.0.2
+pyzmq==24.0.1
+referencing==0.36.2
+requests==2.32.3
+rfc3339-validator==0.1.4
+rfc3986-validator==0.1.1
+rpds-py==0.25.1
+s3fs==2025.2.0
+s3transfer==0.11.2
+scikit-image==0.25.2
+scikit-learn==1.7.1
+scipy==1.15.3
+seaborn==0.13.2
+Send2Trash==1.8.3
+six==1.17.0
+sniffio==1.3.1
+soundfile==0.13.1
+soupsieve==2.7
+soxr==0.5.0.post1
+SQLAlchemy==2.0.41
+stack-data==0.6.3
+tenacity==9.0.0
+terminado==0.18.1
+threadpoolctl==3.6.0
+tifffile==2025.5.10
+tinycss2==1.4.0
+tomli==2.2.1
+tornado==6.4.2
+tqdm==4.67.1
+traitlets==5.14.3
+translationstring==1.4
+types-python-dateutil==2.9.0.20250516
+typing_extensions==4.12.2
+tzdata==2025.1
+uri-template==1.3.0
+urllib3==2.3.0
+uv==0.8.13
+venusian==3.1.1
+wcwidth==0.2.13
+webcolors==24.11.1
+webencodings==0.5.1
+WebOb==1.8.9
+websocket-client==1.8.0
+widgetsnbextension==4.0.14
+wrapt==1.17.2
+yarl==1.18.3
+zope.deprecation==5.1
+zope.interface==7.2
+]
+\end{lstlisting}
+
+\section{Kesimpulan}
+\textbf{Tuliskan kesimpulan Anda mengenai:}
+\begin{itemize}
+    \item Pengalaman setup Python environment untuk multimedia
+    \item Persiapan untuk project multimedia selanjutnya
+    \item Saran untuk mahasiswa lain yang akan melakukan setup serupa
+\end{itemize}
+
+\textit{Kesimpulannya adalah proses setup Python environment untuk multimedia ini berjalan lancar dan saya tidak mengalami banyak kendala. Dengan environment yang sudah terpisah, saya merasa lebih clean dan tidak takut lagi tentang konflik dependency. Saran saya untuk mahasiswa lain adalah selalu gunakan virtual environment untuk setiap proyek agar lebih terorganisir dan mudah dalam manajemen library. Selain itu, dokumentasikan setiap langkah yang diambil agar memudahkan troubleshooting di kemudian hari.}
+
+\section{Referensi}
+Sertakan referensi yang Anda gunakan selama proses setup dan troubleshooting.
+
+\newpage
+\bibliographystyle{IEEEtran}
+\bibliography{Referensi}
+https://chatgpt.com/share/68b1b4e9-ad18-8009-99c6-351b60daaa0d
+\end{document}
