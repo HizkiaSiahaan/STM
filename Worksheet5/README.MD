@@ -1,7 +1,9 @@
 **Laporan Singkat Implementasi Real-time rPPG**
 
 **Mata Kuliah**: Sistem & Teknologi Multimedia
+
 **Nama**: Hizkia Christovita Siahaan
+
 **NIM**: 122140110
 
 ---
